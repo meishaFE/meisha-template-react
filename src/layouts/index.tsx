@@ -1,13 +1,9 @@
 import React from 'react';
-import styles from './index.css';
 
-const BasicLayout: React.FC = props => {
-  return (
-    <div className={styles.normal}>
-      <h1 className={styles.title}>Yay! Welcome to umi!</h1>
-      {props.children}
-    </div>
-  );
-};
+class Layout extends React.Component {
+  render() {
+    return <React.Fragment>{this.props.children}</React.Fragment>;
+  }
+}
 
-export default BasicLayout;
+export default Layout;
