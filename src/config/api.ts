@@ -1,6 +1,6 @@
 const api = {
   account: {
-    login: 'api/login',
+    login: 'api/user/login',
     register: 'api/register'
   }
 };
