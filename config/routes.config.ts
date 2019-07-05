@@ -6,8 +6,9 @@ const routes: IRoute[] = [
     exact: true,
     component: '../layouts',
     routes: [
-      { path: '/welcome', exact: true, component: 'welcome' },
-      { path: '/login', exact: true, component: 'login' }
+      { path: '/', exact: true, component: 'welcome' },
+      { path: '/login', exact: true, component: 'login' },
+      { path: '/register', exact: true, component: 'register' }
     ]
   }
 ];

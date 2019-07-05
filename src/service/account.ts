@@ -1,21 +1,17 @@
 import * as config from '@/config';
 import http from '@/utils/http';
+import * as types from '@/common/type';
 
-interface parameterLogin {
-  phone: string;
-  password: string;
-}
-interface returnsLogin {
-  username: string;
-  sex: number;
-  age: number;
-  phone: string;
-}
-async function login(data: parameterLogin): Promise<returnsLogin> {
+async function login(data: types.ParamLogin) {
   const res = await http.post(config.api.account.login, data);
   return res.data;
 }
 
-login({ phone: '233', password: '11' });
+async function register(data: types.ParamRegister) {
+  const res = await http.post(config.api.account.register, data);
+  return res.data;
+}
 
-export { login };
+export { login, register };
+
+// ts是在编译时校验，对于接口返回的数据无法校验

@@ -1,4 +1,6 @@
 import * as services from '@/service/account';
+import * as types from '@/common/type';
+import store from 'store';
 
 export default {
   namespace: 'account',
@@ -11,16 +13,31 @@ export default {
   },
 
   reducers: {
-    save(state: any, action: any) {
-      return { ...state, ...action.payload };
+    save(state: object, action: types.ModelAction) {
+      const data = { ...state, ...action.payload };
+      store.set('account', data);
+      return data;
     }
   },
 
   effects: {
-    *login(action: { payload: any }, effects: { call: any; put: any }) {
-      const res = yield effects.call(services.login, action.payload);
+    *login({ payload }: types.ModelAction, { call, put }: types.ModelEffects) {
+      const res = yield call(services.login, payload);
 
-      yield effects.put({
+      store.set('auth', res.auth);
+
+      yield put({
+        type: 'save',
+        payload: res
+      });
+    },
+
+    *register({ payload }: types.ModelAction, { call, put }: types.ModelEffects) {
+      const res = yield call(services.register, payload);
+
+      store.set('auth', res.auth);
+
+      yield put({
         type: 'save',
         payload: res
       });

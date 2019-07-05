@@ -1,7 +1,8 @@
 const api = {
   account: {
+    checkAuth: 'api/user/checkAuth',
     login: 'api/user/login',
-    register: 'api/register'
+    register: 'api/user/register'
   }
 };
 

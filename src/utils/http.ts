@@ -69,9 +69,6 @@ $http.interceptors.response.use(
     }
   },
   err => {
-    if (err.response.status === 429) {
-      return Promise.reject({ msg: '请求过于频繁，请稍后重试' });
-    }
     return Promise.reject(err);
   }
 );

@@ -1,22 +1,21 @@
 import styles from './index.less';
 import React from 'react';
-import { connect } from 'dva';
-import { Form, Input, Button } from 'antd';
-import validateRules from '@/config/validateRules';
 import * as types from '@/common/type';
-import router from 'umi/router';
 import Link from 'umi/link';
-import Password from '@/components/password';
+import router from 'umi/router';
+import { Form, Input, Button } from 'antd';
+import { connect } from 'dva';
+import validateRules from '@/config/validateRules';
 
 const FormItem = Form.Item;
 
-class Login extends React.Component<types.ComponentProps, any> {
+class Register extends React.Component<types.ComponentProps, any> {
   handleSubmit = (e: any) => {
     e.preventDefault();
 
     this.props.form.validateFields(async (err: any, values: object) => {
       if (!err) {
-        await this.props.dispatch({ type: 'account/login', payload: values });
+        await this.props.dispatch({ type: 'account/register', payload: values });
         router.push('/');
       }
     });
@@ -24,12 +23,12 @@ class Login extends React.Component<types.ComponentProps, any> {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    const loading = this.props.loading.effects['account/login'];
+    const loading = this.props.loading.effects['account/register'];
 
     return (
       <div className={styles.container}>
         <div className={styles.content}>
-          <h3>登录</h3>
+          <h3>注册</h3>
 
           <Form className={styles.form} onSubmit={this.handleSubmit}>
             <FormItem>
@@ -51,17 +50,25 @@ class Login extends React.Component<types.ComponentProps, any> {
               {getFieldDecorator('password', {
                 rules: validateRules.password,
                 validateTrigger: 'onBlur'
-              })(<Password placeholder="密码" />)}
+              })(
+                <Input
+                  size="large"
+                  type="password"
+                  maxLength={16}
+                  placeholder="密码"
+                  autoComplete="off"
+                />
+              )}
             </FormItem>
 
             <Button className={styles.btnSubmit} htmlType="submit" type="primary" loading={loading}>
-              登录
+              注册
             </Button>
           </Form>
         </div>
 
-        <Link className={styles.btnBottom} to="/register">
-          注册
+        <Link className={styles.btnBottom} to="/login">
+          登录
         </Link>
       </div>
     );
@@ -70,4 +77,4 @@ class Login extends React.Component<types.ComponentProps, any> {
 
 export default connect((state: any) => ({
   loading: state.loading
-}))(Form.create()(Login));
+}))(Form.create()(Register));
