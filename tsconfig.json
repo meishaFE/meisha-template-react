@@ -15,6 +15,10 @@
       ]
     },
     "allowSyntheticDefaultImports": true,
-    "allowJs": true
-  }
+    "allowJs": true,
+    "outDir": "./dist"
+  },
+  "exclude": [
+    "mock"
+  ]
 }

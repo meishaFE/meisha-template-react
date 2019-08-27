@@ -10,7 +10,6 @@ export const dva = {
     onError(err: any) {
       // err.preventDefault();
       // console.error(err.message);
-      console.log('2333');
       alert(err.msg);
     }
   }
